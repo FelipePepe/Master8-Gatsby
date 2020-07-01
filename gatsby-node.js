@@ -1,22 +1,10 @@
 const { resolve } = require('path');
 
-// const query = `
-// query {
-//   postListQuery: allMarkdownRemark {
-//     nodes {
-//       frontmatter {
-//         path
-//       }
-//     }
-//   }
-// }
-// `;
-
 const query = `
 query {
-  postListQuery: allContentContenfulPost {
+  postListQuery: allContentfulPost {
     nodes {
-        path
+      path
     }
   }
 }
@@ -28,7 +16,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { postListQuery } = data;
 
   postListQuery.nodes.forEach((node) => {
-    const { path } = node.frontmatter;
+    const { path } = node;
     if (path) {
       createPage({
         path,
